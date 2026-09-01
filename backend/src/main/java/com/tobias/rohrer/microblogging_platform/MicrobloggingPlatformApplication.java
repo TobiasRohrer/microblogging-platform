@@ -1,0 +1,13 @@
+package com.tobias.rohrer.microblogging_platform;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MicrobloggingPlatformApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(MicrobloggingPlatformApplication.class, args);
+	}
+
+}

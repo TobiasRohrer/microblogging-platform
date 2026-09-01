@@ -1,0 +1,10 @@
+.env
+dist/
+build/
+out/
+target/
+.gradle/
+node_modules/
+.idea/
+.vscode/
+*.iml
