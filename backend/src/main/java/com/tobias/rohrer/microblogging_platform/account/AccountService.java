@@ -6,6 +6,7 @@ import com.tobias.rohrer.microblogging_platform.exception.ResourceNotFoundExcept
 import com.tobias.rohrer.microblogging_platform.post.Post;
 import com.tobias.rohrer.microblogging_platform.post.PostRepository;
 import com.tobias.rohrer.microblogging_platform.post.PostResponse;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -141,5 +142,12 @@ public class AccountService {
                 () -> new ResourceNotFoundException("Account not found with username: " + username)
         );
         return account.getFollowing().stream().map(account1 -> AccountResponse.fromEntity(account1, principal.getId())).toList();
+    }
+
+    public List<UserSearchResponse> search(String searchTerm, UserPrincipal principal) {
+        if (searchTerm.trim().length() < 2) {
+            throw new IllegalArgumentException("Searched username has to be at least 2 digits long");
+        }
+        return accountRepository.searchForDropdown(searchTerm, principal.getId(), PageRequest.of(0,8));
     }
 }

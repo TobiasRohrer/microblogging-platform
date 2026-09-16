@@ -73,6 +73,7 @@ public class PostService {
 
         Post comment = new Post(author, request.getContent());
         comment.setParentPost(parent);
+        parent.addComment();
 
         Post savedComment = postRepository.save(comment);
         return PostResponse.fromEntity(savedComment, authorId);

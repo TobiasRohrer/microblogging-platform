@@ -88,4 +88,9 @@ public class AccountController {
     public ResponseEntity<String> getMyUsername(@AuthenticationPrincipal UserPrincipal principal) {
         return ResponseEntity.ok(accountService.getAccountByEmail(principal.getUsername(), principal).name());
     }
+
+    @GetMapping("/search/{searchTerm}")
+    public ResponseEntity<List<UserSearchResponse>> getSearchedAccounts(@PathVariable String searchTerm, @AuthenticationPrincipal UserPrincipal principal) {
+        return ResponseEntity.ok(accountService.search(searchTerm, principal));
+    }
 }

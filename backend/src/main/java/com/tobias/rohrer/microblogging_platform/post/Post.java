@@ -27,7 +27,7 @@ public class Post {
     private Set<Account> likedByAccounts = new HashSet<>();
     private LocalDateTime postDate;
     private String content;
-    private int likes, views, reposts, bookmarks;
+    private int likes, views, reposts, bookmarks, comments;
 
     public Post(Account author, String content) {
         this.author = author;
@@ -37,6 +37,7 @@ public class Post {
         this.bookmarks = 0;
         this.views = 0;
         this.reposts = 0;
+        this.comments = 0;
         this.parentPost = null;
     }
 
@@ -70,6 +71,14 @@ public class Post {
             this.likes = Math.max(0, this.likes - 1);
         }
         return this;
+    }
+
+    public int getComments() {
+        return this.comments;
+    }
+
+    public int addComment() {
+        return ++comments;
     }
 
     public Set<Account> getLikedByAccounts() {

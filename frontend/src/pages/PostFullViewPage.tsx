@@ -5,6 +5,7 @@ import PostComponent from "../components/PostComponent";
 import { LikeButton } from "../components/LikeButton";
 import CommentField from "../components/CommentField";
 import type { Post } from "../components/types";
+import { MessageCircle } from "lucide-react";
 
 interface Props {
   postId: number;
@@ -137,6 +138,12 @@ export default function PostFullViewPage({
           </div>
 
           <div className="py-2.5 flex items-center text-neutral-500 -ml-2">
+            <div className="p-1.5 rounded-full" onClick={() => onSelectPost(parentPost.id, parentPost.authorName)}>
+              <MessageCircle
+                className={`w-4 h-4`}
+              />
+            </div>
+            <span>{parentPost.comments}</span>
             <LikeButton
               postId={parentPost.id.toString()}
               initialCount={parentPost.likes}
@@ -152,9 +159,7 @@ export default function PostFullViewPage({
 
       {parentPost ? (
         <div>
-          <CommentField
-            postId={parentPost.id}
-          />
+          <CommentField postId={parentPost.id} />
         </div>
       ) : (
         <div className="p-8 text-center text-neutral-500 text-sm">

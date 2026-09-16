@@ -14,6 +14,7 @@ public record PostResponse(
         int views,
         int reposts,
         int bookmarks,
+        int comments,
         boolean isLiked
 ) {
     public static PostResponse fromEntity(Post post, Long accountId) {
@@ -28,6 +29,7 @@ public record PostResponse(
                 post.getViews(),
                 post.getReposts(),
                 post.getBookmarks(),
+                post.getComments(),
                 accountId != null && post.getLikedByAccounts().stream().anyMatch(account -> Objects.equals(account.getId(), accountId))
         );
     }
@@ -39,12 +41,12 @@ public record PostResponse(
         String timeDif = "";
         if (timeDifHour == 0) {
             if (timeDifMinute == 0) {
-                timeDif = (timeDifSecond < 0 ? 60 - Math.abs(timeDifSecond) : timeDifSecond) + "s ago";
+                timeDif = (timeDifSecond < 0 ? LocalDateTime.now().getSecond() - post.getPostDate().getSecond() : (60 - post.getPostDate().getSecond()) + LocalDateTime.now().getSecond()) + "s ago";
             } else {
-                timeDif = (timeDifMinute < 0 ? 60 - Math.abs(timeDifMinute) : timeDifMinute) + "m ago";
+                timeDif = (timeDifMinute < 0 ? LocalDateTime.now().getMinute() - post.getPostDate().getMinute() : (60 - post.getPostDate().getMinute()) + LocalDateTime.now().getMinute()) + "m ago";
             }
         } else {
-            timeDif = (timeDifHour < 0 ? 24 - Math.abs(timeDifHour) : timeDifHour) + "h ago";
+            timeDif = (timeDifHour < 0 ? LocalDateTime.now().getHour() - post.getPostDate().getHour() : (24 - post.getPostDate().getHour()) + LocalDateTime.now().getHour()) + "h ago";
         }
         return post.getPostDate().isAfter((LocalDateTime.now().minusDays(1L))) ? timeDif
                 : post.getPostDate().toLocalDate().toString();

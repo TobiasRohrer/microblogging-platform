@@ -26,5 +26,11 @@ export interface Post {
   views: number;
   reposts: number;
   bookmarks: number;
+  comments: number;
   isLiked: boolean;
+}
+
+export interface SearchResponse {
+  name: string;
+  isFollowing: boolean;
 }

@@ -1,5 +1,6 @@
 import { LikeButton } from "./LikeButton";
 import type { Post } from "./types";
+import { MessageCircle } from "lucide-react";
 
 interface Props {
   post: Post;
@@ -7,8 +8,11 @@ interface Props {
   onSelectAccount: (username: string) => void;
 }
 
-export default function PostComponent({ post, onSelectAccount, onSelectPost }: Props) {
-
+export default function PostComponent({
+  post,
+  onSelectAccount,
+  onSelectPost,
+}: Props) {
   return (
     <article className="p-4 hover:bg-white/[0.03] transition-colors border-b border-neutral-800 flex gap-3 cursor-pointer">
       <div
@@ -54,6 +58,10 @@ export default function PostComponent({ post, onSelectAccount, onSelectPost }: P
         </p>
 
         <div className="flex items-center text-neutral-500 -ml-2">
+          <div className="p-1.5 rounded-full" onClick={() => onSelectPost(post.id)}>
+            <MessageCircle className={`w-4 h-4`} />
+          </div>
+          <span>{post.comments}</span>
           <LikeButton
             postId={post.id.toString()}
             initialCount={post.likes}

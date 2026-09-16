@@ -9,6 +9,7 @@ export default function PostField({ postId }: Props) {
   const token = useAuthStore.getState().token;
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [content, setContent] = useState<string>("");
+  const username = useAuthStore.getState().username
 
   function handlePostLength(value: string) {
     if (value.length <= 280) {
@@ -60,7 +61,7 @@ export default function PostField({ postId }: Props) {
       )}
       <form onSubmit={handleSubmit} className="flex gap-3">
         <div className="w-10 h-10 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center font-bold text-sm text-neutral-400 shrink-0">
-          U
+          {username?.toUpperCase().charAt(0)}
         </div>
         <div className="flex-1 min-w-0">
           <textarea

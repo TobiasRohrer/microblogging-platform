@@ -113,14 +113,16 @@ export default function AccountPage({
           </div>
 
           <div className="divide-y divide-neutral-800">
-            {res.posts.map((post) => (
-              <PostComponent
-                key={post.id}
-                post={post}
-                onSelectPost={() => onSelectPost(post.id, post.authorName)}
-                onSelectAccount={() => onSelectAccount(post.authorName)}
-              />
-            ))}
+            {res.posts
+              .filter((post) => post.parentPost === null)
+              .map((post) => (
+                <PostComponent
+                  key={post.id}
+                  post={post}
+                  onSelectPost={() => onSelectPost(post.id, post.authorName)}
+                  onSelectAccount={() => onSelectAccount(post.authorName)}
+                />
+              ))}
           </div>
         </div>
       ) : (

@@ -6,6 +6,7 @@ import FollowingPage from "./FollowingPage";
 import type { ActiveView } from "../components/types";
 import PostFullViewPage from "./PostFullViewPage";
 import { useAuthStore } from "../stores/AuthStore";
+import SearchBar from "../components/SearchBar";
 
 export default function Home() {
   const [activeView, setActiveView] = useState<ActiveView>({
@@ -98,11 +99,7 @@ export default function Home() {
           })()}
         </main>
 
-        <aside className="hidden md:block md:col-span-3 p-4 space-y-4 border-l border-neutral-800">
-          <div className="bg-neutral-900 text-neutral-400 text-sm px-4 py-2.5 rounded-full border border-transparent focus-within:border-white focus-within:bg-black focus-within:text-white">
-            Search
-          </div>
-        </aside>
+        <SearchBar onSelectAccount={showAccount}></SearchBar>
       </div>
     </div>
   );
