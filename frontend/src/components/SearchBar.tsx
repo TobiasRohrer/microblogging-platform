@@ -9,7 +9,6 @@ interface Props {
 
 export default function SearchBar({ onSelectAccount }: Props) {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const token = useAuthStore.getState().token;
   const navigate = useNavigate();
   const [res, setRes] = useState<SearchResponse[]>([]);
